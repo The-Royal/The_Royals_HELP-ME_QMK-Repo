@@ -66,7 +66,14 @@ void render_logo(void) {
 }
 
 
-#endif
+extern bool oled_initialized;
+void matrix_scan_keymap(void) {
+  if(!oled_initialized) {
+    wait_ms(200);
+        oled_init(0);
+
+  }
+ }
 
 uint16_t        oled_timer;
 void oled_task_keyboard(void) {
@@ -78,4 +85,6 @@ void oled_task_keyboard(void) {
 
             render_logo();
         
-    }
+   }
+
+#endif
